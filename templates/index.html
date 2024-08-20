@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Weather Dashboard</h1>
+        <form method="POST" class="mt-4">
+            <div class="form-group row">
+                <div class="col-sm-9">
+                    <input type="text" name="city" class="form-control" placeholder="Enter city" required>
+                </div>
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-primary btn-block">Get Weather</button>
+                </div>
+            </div>
+        </form>
+
+        {% if weather %}
+            <div class="card mt-4">
+                <div class="card-body text-center">
+                    <h2 class="card-title">{{ weather.city }}</h2>
+                    <p class="card-text">{{ weather.temperature }}°C, {{ weather.description }}</p>
+                    <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="weather icon" class="img-fluid">
+                </div>
+            </div>
+        {% elif weather is not none %}
+            <div class="alert alert-danger mt-4">
+                City not found. Please try again.
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2
